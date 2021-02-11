@@ -3,6 +3,8 @@ import * as types from './types';
 
 export const statusChanged = (payload) => ({ type: types.STATUS_CHANGED, payload });
 
+export const toggleChanged = (payload) => ({ type: types.TOGGLE_CHANGED, payload });
+
 /**
  * Products Action Creator - Get All Products
  *
@@ -16,7 +18,7 @@ export const fetchAllProducts = (callback) => async dispatch => {
 
         if (result && result.products) {
             dispatch({ type: types.GET_ALL_PRODUCTS_SUCCESS, payload: result.products });
-            console.log(`${types.GET_ALL_PRODUCTS_SUCCESS}: `, result);
+            // console.log(`${types.GET_ALL_PRODUCTS_SUCCESS}: `, result);
             callback && callback();
         }
     } catch (error) {

@@ -2,6 +2,7 @@ import * as types from './types';
 
 const INITIAL_STATE = {
     products: [],
+    toggle: 'grid',
     status: 'active',
     product_added: false,
     fetching_all_products: false,
@@ -15,6 +16,12 @@ const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 status: action.payload,
+            };
+
+        case types.TOGGLE_CHANGED:
+            return {
+                ...state,
+                toggle: action.payload,
             };
 
         case types.GET_ALL_PRODUCTS_START:
@@ -107,7 +114,10 @@ const reducer = (state = INITIAL_STATE, action) => {
 
             state.products[index].deleted_at = null;
 
-            return { ...state, products: [...state.products] };
+            return {
+                ...state,
+                products: [...state.products]
+            };
 
         default:
             return state;
