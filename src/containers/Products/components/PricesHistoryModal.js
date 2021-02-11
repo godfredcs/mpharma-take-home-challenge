@@ -1,12 +1,18 @@
 import React from 'react';
-import moment from 'moment';
+import {Helpers} from './../../../globals';
 
-const PricesHistoryModal = ({product}) => {
+const PricesHistoryModal = ({product, toggle}) => {
     return (
         <div>
-            <button type="button" className="btn btn-warning form-control" data-toggle="modal" data-target={`#product-prices-${product.id}`}>
-                Price history
-            </button>
+            {
+                toggle === 'grid'
+                    ? <button type="button" className="btn btn-warning form-control" data-toggle="modal" data-target={`#product-prices-${product.id}`}>
+                        Price history
+                    </button>
+                    : <a type="button" className="btn text-info p-0" data-toggle="modal" data-target={`#product-prices-${product.id}`}>
+                        Price history
+                    </a>
+            }
 
             <div className="modal fade" id={`product-prices-${product.id}`} tabIndex="-1" role="dialog" aria-labelledby="add-product-title" aria-hidden="true">
                 <div className="modal-dialog" role="document">
@@ -19,7 +25,7 @@ const PricesHistoryModal = ({product}) => {
                         </div>
                         <div className="modal-body">
                             <div>
-                                <table className="table border-top-0">
+                                <table id="prices" className="table border-top-0">
                                     <thead className="border-top-0">
                                         <tr>
                                             <th scope="col">Price</th>
@@ -30,8 +36,8 @@ const PricesHistoryModal = ({product}) => {
                                         {
                                             product.prices.map(price => (
                                                 <tr key={`prices-${product.id}-${price.id}`}>
-                                                    <td>{price.price}</td>
-                                                    <td>{moment(price.date).format('Do MMMM YYYY, h:mm:ss a')}</td>
+                                                    <td>{Helpers.formattedCedis(price.price)}</td>
+                                                    <td>{Helpers.formattedDateTime(price.date)}</td>
                                                 </tr>
                                             ))
                                         }

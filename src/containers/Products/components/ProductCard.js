@@ -1,10 +1,11 @@
 import React from 'react';
+import {Helpers} from './../../../globals';
 import EditProductModal from './EditProductModal';
 import DeleteProductModal from './DeleteProductModal';
 import PricesHistoryModal from './PricesHistoryModal';
 import RestoreProductModal from './RestoreProductModal';
 
-const ProductCard = ({product, editProduct, deleteProduct, restoreProduct}) => {
+const ProductCard = ({product, toggle, editProduct, deleteProduct, restoreProduct}) => {
     const src = product.image ? product.image : 'http://placehold.it/120x120&text=image1';
 
     return (
@@ -15,7 +16,7 @@ const ProductCard = ({product, editProduct, deleteProduct, restoreProduct}) => {
 
                 <div className="row">
                     <div className="col-sm-6">
-                        <p className="card-text">{product.prices ? product.prices[product.prices.length - 1].price : 'N/A'}</p>
+                        <p className="card-text">{product.prices ? Helpers.formattedCedis(product.prices[product.prices.length - 1].price) : 'N/A'}</p>
                     </div>
 
                     <div className="col-sm-3">
@@ -32,7 +33,7 @@ const ProductCard = ({product, editProduct, deleteProduct, restoreProduct}) => {
                 </div>
             </div>
 
-            <PricesHistoryModal product={product} />
+            <PricesHistoryModal toggle={toggle} product={product} />
         </div>
     );
 };
